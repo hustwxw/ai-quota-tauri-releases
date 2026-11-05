@@ -1,8 +1,8 @@
-# 公司 AI 用量助手 · Tauri
+# AI 用量助手 · Tauri
 
-一个面向公司模型服务用户的中文桌面工具：查看剩余额度、查询调用记录、分析 Token 用量，并了解当前账号可见的模型与计费信息。
+一个面向模型服务用户的中文桌面工具：查看剩余额度、查询调用记录、分析 Token 用量，并了解当前账号可见的模型与计费信息。
 
-**当前公开版本：v0.4.1 · Windows x64 · 提供安装版和免安装版**
+**当前公开版本：v0.4.2 · Windows x64 · 提供安装版和免安装版**
 
 [下载最新版本](https://github.com/hustwxw/ai-quota-tauri-releases/releases/latest) · [查看全部发行](https://github.com/hustwxw/ai-quota-tauri-releases/releases) · [版本演变](#版本演变)
 
@@ -53,9 +53,10 @@
 
 ### 连接设置与桌面使用
 
-- 配置公司服务地址和个人 `skey`（API Token）。
+- 配置模型服务地址和个人 `skey`（API Token）。
 - 凭据保存在 Windows 系统凭据库，界面不回显已保存的 Token。
-- 未配置凭据时提供引导，避免误以为空白页面或接口故障。
+- 首次启动不预填地址，提供获取连接信息、填写地址与 skey、保存测试的三步引导。
+- 测试失败时留在设置页提示原因，可以修改并重试。
 - 最小化后进入系统托盘，点击托盘图标可恢复主窗口；Windows 下关闭窗口会退出程序。
 
 ### 版本历史与差异更新
@@ -78,15 +79,15 @@
 
 两个包的应用功能相同。普通用户不需要安装 Node.js 或 Rust。软件依赖 Microsoft Edge WebView2；安装版在系统缺少该运行时时会尝试下载官方组件，需要网络。
 
-**v0.4.1 下载：** [安装版](https://github.com/hustwxw/ai-quota-tauri-releases/releases/download/v0.4.1/AI-Quota-Tauri-0.4.1-Windows-x64-Setup.exe) · [免安装版](https://github.com/hustwxw/ai-quota-tauri-releases/releases/download/v0.4.1/AI-Quota-Tauri-0.4.1-Windows-x64.exe)
+**v0.4.2 下载：** [安装版](https://github.com/hustwxw/ai-quota-tauri-releases/releases/download/v0.4.2/AI-Quota-Tauri-0.4.2-Windows-x64-Setup.exe) · [免安装版](https://github.com/hustwxw/ai-quota-tauri-releases/releases/download/v0.4.2/AI-Quota-Tauri-0.4.2-Windows-x64.exe)
 
 Release 中的 `.bsdiff`、`update.json` 用于软件更新，**不需要手动运行**。`SHA256SUMS.txt` 用于核对下载文件的 SHA-256。
 
 ### 首次连接
 
-1. 连接公司网络或 VPN，确保可以访问公司模型服务。
-2. 打开软件，进入“连接设置”，确认服务地址。
-3. 填写公司分配给你的 skey，点击“保存并测试连接”。
+1. 向服务提供方获取服务器地址和 skey；内网服务可能需要先连接对应网络或 VPN。
+2. 首次启动地址为空，按三步引导进入“连接设置”，填写服务地址，例如 https://api.example.com，不附加 /v1 等接口路径。
+3. 填写服务提供方分配给你的 skey，点击“保存并测试连接”。
 4. 连接成功后，在“概览”“调用分析”“调用记录”“模型与计费”中查看数据。
 
 额度和记录通过手动操作刷新，分析结果基于本次实际取得的日志；查看时请留意更新时间与异常提示。
@@ -104,14 +105,25 @@ Release 中的 `.bsdiff`、`update.json` 用于软件更新，**不需要手动�
 
 - **v0.3.0 及更早版本没有更新入口，需要先手动安装一次 v0.4.0 或后续带更新功能的版本。**
 - 后续版本发布时，维护者需要为相应旧版本提供匹配补丁。没有匹配补丁时会明确提示，不会自动改为下载完整安装包。
-- 更新仓库公开可下载，客户端不需要填写 GitHub Token；检查软件更新也不需要公司 skey。
+- 更新仓库公开可下载，客户端不需要填写 GitHub Token；检查软件更新也不需要 skey。
 - 更新期间请勿强制关机或手动删除程序目录中的更新暂存文件。
 
 ## 版本演变
 
 **基础查询 → 调用分析 → 持续分页采集 → 内置版本历史 → Windows 差异更新**
 
-以下记录按新到旧排列，描述 Tauri 版自身的功能演进。早期版本曾在本地交付，其日期不代表对应版本已在本公开仓库发布；当前公开 Release 为 v0.4.1。
+以下记录按新到旧排列，描述 Tauri 版自身的功能演进。早期版本曾在本地交付，其日期不代表对应版本已在本公开仓库发布；当前公开 Release 为 v0.4.2。
+
+### v0.4.2 · 2026-11-05
+
+**首次连接引导与使用体验优化**
+
+- 新增“关于我”，展示作者 hustwxw、邮箱 softwarewxw@gmail.com 与 GitHub，支持复制联系方式。
+- 统一应用名称为“AI 用量助手”，更新窗口、托盘、安装产品和页面文案。
+- 首次启动地址为空，新增三步指引，说明获取与填写地址、skey 及连接排查；已保存的连接保留。
+- 打开分析日志时平滑定位到明细，支持减少动态效果和键盘焦点。
+
+[查看 v0.4.2 Release](https://github.com/hustwxw/ai-quota-tauri-releases/releases/tag/v0.4.2)
 
 ### v0.4.1 · 2026-11-05
 
@@ -140,7 +152,7 @@ Release 中的 `.bsdiff`、`update.json` 用于软件更新，**不需要手动�
 
 - 新增独立“版本历史”页面，倒序展示版本号、日期与更新内容。
 - 标记当前运行版本，保留早期迭代记录。
-- 无需配置 skey 或连接公司网络，也能查看本机版本记录。
+- 无需配置 skey 或连接服务网络，也能查看本机版本记录。
 
 ### v0.2.1 · 2026-10-23
 
@@ -178,7 +190,7 @@ Release 中的 `.bsdiff`、`update.json` 用于软件更新，**不需要手动�
 
 ### 没有 skey，能用哪些功能？
 
-可以查看内置版本历史、检查软件更新。查询公司额度、调用记录、模型与计费，需要有效的公司 skey 和可访问的公司服务。
+可以查看“关于我”、内置版本历史，并检查软件更新。查询服务额度、调用记录、模型与计费，需要有效的 skey 和可访问的模型服务。
 
 ### 软件会调用模型、额外消耗推理 Token 吗？
 
@@ -190,6 +202,6 @@ Release 中的 `.bsdiff`、`update.json` 用于软件更新，**不需要手动�
 
 ## 数据与反馈
 
-公司服务连接信息保存在本机系统凭据库；软件更新从本公开仓库获取文件，不向更新仓库上传公司 skey 或调用日志。分析结果以服务接口实际返回的数据为准。
+模型服务连接信息保存在本机系统凭据库；软件更新从本公开仓库获取文件，不向更新仓库上传 skey 或调用日志。分析结果以服务接口实际返回的数据为准。
 
-遇到问题，可通过 [Issues](https://github.com/hustwxw/ai-quota-tauri-releases/issues) 反馈软件版本、Windows 版本、操作步骤和错误提示。**请勿在公开 Issue、截图或附件中提交 skey、账号凭据、公司内网地址或原始调用日志。**
+遇到问题，可通过 [Issues](https://github.com/hustwxw/ai-quota-tauri-releases/issues) 反馈软件版本、Windows 版本、操作步骤和错误提示。**请勿在公开 Issue、截图或附件中提交 skey、账号凭据、内网地址或原始调用日志。**
