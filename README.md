@@ -59,10 +59,8 @@
 
 前往 [最新 Release](https://github.com/hustwxw/ai-quota-tauri-releases/releases/latest)，展开 **Assets**，根据需要选择：
 
-- **安装版：`AI-Quota-Tauri-<版本>-Windows-x64-Setup.exe`**  
-  适合日常使用。运行安装程序，按向导安装，再通过快捷方式打开。
-- **免安装版：`AI-Quota-Tauri-<版本>-Windows-x64.exe`**  
-  放到一个固定、允许写入的文件夹，双击运行即可。
+- **安装版：`AI-Quota-Tauri-<版本>-Windows-x64-Setup.exe`**，适合日常使用。运行安装程序，按向导安装，再通过快捷方式打开。
+- **免安装版：`AI-Quota-Tauri-<版本>-Windows-x64.exe`**，放到一个固定、允许写入的文件夹，双击运行即可。
 
 两个包的应用功能相同。普通用户不需要安装 Node.js 或 Rust。软件依赖 Microsoft Edge WebView2；安装版在系统缺少该运行时时会尝试下载官方组件，需要网络。
 
