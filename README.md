@@ -2,7 +2,7 @@
 
 一个面向模型服务用户的中文桌面工具：查看剩余额度、查询调用记录、分析 Token 用量，并了解当前账号可见的模型与计费信息。
 
-**当前公开版本：v0.4.2 · Windows x64 · 提供安装版和免安装版**
+**当前公开版本：v0.4.3 · Windows x64 · 提供安装版和免安装版**
 
 [下载最新版本](https://github.com/hustwxw/ai-quota-tauri-releases/releases/latest) · [查看全部发行](https://github.com/hustwxw/ai-quota-tauri-releases/releases) · [版本演变](#版本演变)
 
@@ -79,7 +79,7 @@
 
 两个包的应用功能相同。普通用户不需要安装 Node.js 或 Rust。软件依赖 Microsoft Edge WebView2；安装版在系统缺少该运行时时会尝试下载官方组件，需要网络。
 
-**v0.4.2 下载：** [安装版](https://github.com/hustwxw/ai-quota-tauri-releases/releases/download/v0.4.2/AI-Quota-Tauri-0.4.2-Windows-x64-Setup.exe) · [免安装版](https://github.com/hustwxw/ai-quota-tauri-releases/releases/download/v0.4.2/AI-Quota-Tauri-0.4.2-Windows-x64.exe)
+**v0.4.3 下载：** [安装版](https://github.com/hustwxw/ai-quota-tauri-releases/releases/download/v0.4.3/AI-Quota-Tauri-0.4.3-Windows-x64-Setup.exe) · [免安装版](https://github.com/hustwxw/ai-quota-tauri-releases/releases/download/v0.4.3/AI-Quota-Tauri-0.4.3-Windows-x64.exe)
 
 Release 中的 `.bsdiff`、`update.json` 用于软件更新，**不需要手动运行**。`SHA256SUMS.txt` 用于核对下载文件的 SHA-256。
 
@@ -112,7 +112,17 @@ Release 中的 `.bsdiff`、`update.json` 用于软件更新，**不需要手动�
 
 **基础查询 → 调用分析 → 持续分页采集 → 内置版本历史 → Windows 差异更新**
 
-以下记录按新到旧排列，描述 Tauri 版自身的功能演进。早期版本曾在本地交付，其日期不代表对应版本已在本公开仓库发布；当前公开 Release 为 v0.4.2。
+以下记录按新到旧排列，描述 Tauri 版自身的功能演进。早期版本曾在本地交付，其日期不代表对应版本已在本公开仓库发布；当前公开 Release 为 v0.4.3。
+
+### v0.4.3 · 2026-11-05
+
+**修复更新后恢复旧版的问题**
+
+- 修复 Windows 路径格式差异导致的启动确认失败，避免新版已正常打开却被恢复为旧版。
+- 继续在原 EXE 路径完成替换，保留任务栏固定入口和快捷方式的目标路径；文件名可能仍带旧版本号，以程序内显示版本为准。
+- 启动确认写入失败时记录具体原因，保留真正启动失败时的恢复保护。
+
+[查看 v0.4.3 Release](https://github.com/hustwxw/ai-quota-tauri-releases/releases/tag/v0.4.3)
 
 ### v0.4.2 · 2026-11-05
 
@@ -184,7 +194,7 @@ Release 中的 `.bsdiff`、`update.json` 用于软件更新，**不需要手动�
 
 ### Windows 提示“已保护你的电脑”，怎么办？
 
-当前 v0.4.1 的安装包和免安装 EXE 均未做 Windows 发布者代码签名，下载后可能出现 Microsoft Defender SmartScreen 提示。确认文件来自本仓库的 Release，且与发布校验值一致后，可在系统允许的情况下选择 **“更多信息” → “仍要运行”**。公司策略可能限制该操作，此时请联系 IT。
+当前 v0.4.3 的安装包和免安装 EXE 均未做 Windows 发布者代码签名，下载后可能出现 Microsoft Defender SmartScreen 提示。确认文件来自本仓库的 Release，且与发布校验值一致后，可在系统允许的情况下选择 **“更多信息” → “仍要运行”**。公司策略可能限制该操作，此时请联系 IT。
 
 更新清单的 Ed25519 签名用于验证软件更新，与 Windows 发布者代码签名是两套机制；它不会消除 SmartScreen 提示。无需为了运行本软件而关闭系统防护。
 
