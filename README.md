@@ -2,7 +2,7 @@
 
 一个面向模型服务用户的中文桌面工具：查看剩余额度、查询调用记录、分析 Token 用量，并了解当前账号可见的模型与计费信息。
 
-**当前公开版本：v0.4.3 · Windows x64 · 提供安装版和免安装版**
+**当前公开版本：v0.4.4 · Windows x64 · 提供安装版和免安装版**
 
 [下载最新版本](https://github.com/hustwxw/ai-quota-tauri-releases/releases/latest) · [查看全部发行](https://github.com/hustwxw/ai-quota-tauri-releases/releases) · [版本演变](#版本演变)
 
@@ -30,6 +30,7 @@
 - 汇总调用条数、配额消耗以及接口提供的输入/输出 Token。
 - 提供用量趋势、模型排行、Token 趋势和小时分布四类图表。
 - 点击图表查看对应明细，帮助定位用量集中在哪一天、哪个模型或哪个时段。
+- 按调用 IP 查看日志条数、占比、配额点和 Token 用量，点击地址查看对应日志。
 - 按所选日期持续分页读取，可取消采集；部分失败时保留已取得的结果。
 
 单次日期范围最长 93 天。自 v0.2.1 起不再设置固定的 5,000 条、60 秒或 100 页采集上限；实际耗时仍受日志数量、网络和服务端响应影响。接口没有返回的字段会提示缺失，不自动补成零。
@@ -79,7 +80,7 @@
 
 两个包的应用功能相同。普通用户不需要安装 Node.js 或 Rust。软件依赖 Microsoft Edge WebView2；安装版在系统缺少该运行时时会尝试下载官方组件，需要网络。
 
-**v0.4.3 下载：** [安装版](https://github.com/hustwxw/ai-quota-tauri-releases/releases/download/v0.4.3/AI-Quota-Tauri-0.4.3-Windows-x64-Setup.exe) · [免安装版](https://github.com/hustwxw/ai-quota-tauri-releases/releases/download/v0.4.3/AI-Quota-Tauri-0.4.3-Windows-x64.exe)
+**v0.4.4 下载：** [安装版](https://github.com/hustwxw/ai-quota-tauri-releases/releases/download/v0.4.4/AI-Quota-Tauri-0.4.4-Windows-x64-Setup.exe) · [免安装版](https://github.com/hustwxw/ai-quota-tauri-releases/releases/download/v0.4.4/AI-Quota-Tauri-0.4.4-Windows-x64.exe)
 
 Release 中的 `.bsdiff`、`update.json` 用于软件更新，**不需要手动运行**。`SHA256SUMS.txt` 用于核对下载文件的 SHA-256。
 
@@ -112,7 +113,16 @@ Release 中的 `.bsdiff`、`update.json` 用于软件更新，**不需要手动�
 
 **基础查询 → 调用分析 → 持续分页采集 → 内置版本历史 → Windows 差异更新**
 
-以下记录按新到旧排列，描述 Tauri 版自身的功能演进。早期版本曾在本地交付，其日期不代表对应版本已在本公开仓库发布；当前公开 Release 为 v0.4.3。
+以下记录按新到旧排列，描述 Tauri 版自身的功能演进。早期版本曾在本地交付，其日期不代表对应版本已在本公开仓库发布；当前公开 Release 为 v0.4.4。
+
+### v0.4.4 · 2026-11-13
+
+**调用分析新增 IP 分布**
+
+- 按日志条数或配额点净和排序，查看各 IP 的日志占比、输入和输出 Token。
+- 排行跟随日期范围和模型筛选，可打开指定 IP 或无有效 IP 的日志明细。
+
+[查看 v0.4.4 Release](https://github.com/hustwxw/ai-quota-tauri-releases/releases/tag/v0.4.4)
 
 ### v0.4.3 · 2026-11-05
 
@@ -194,7 +204,7 @@ Release 中的 `.bsdiff`、`update.json` 用于软件更新，**不需要手动�
 
 ### Windows 提示“已保护你的电脑”，怎么办？
 
-当前 v0.4.3 的安装包和免安装 EXE 均未做 Windows 发布者代码签名，下载后可能出现 Microsoft Defender SmartScreen 提示。确认文件来自本仓库的 Release，且与发布校验值一致后，可在系统允许的情况下选择 **“更多信息” → “仍要运行”**。公司策略可能限制该操作，此时请联系 IT。
+当前 v0.4.4 的安装包和免安装 EXE 均未做 Windows 发布者代码签名，下载后可能出现 Microsoft Defender SmartScreen 提示。确认文件来自本仓库的 Release，且与发布校验值一致后，可在系统允许的情况下选择 **“更多信息” → “仍要运行”**。公司策略可能限制该操作，此时请联系 IT。
 
 更新清单的 Ed25519 签名用于验证软件更新，与 Windows 发布者代码签名是两套机制；它不会消除 SmartScreen 提示。无需为了运行本软件而关闭系统防护。
 
